@@ -14,6 +14,8 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - -mongo-data:/data/db
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
       interval: 10s
@@ -30,3 +32,6 @@ services:
       - 8081:8081
     environment:
       - ME_CONFIG_MONGODB_URL=mongodb://admin:password@mongo:27017
+volumes:
+  -mongo-data:
+    driver: local
