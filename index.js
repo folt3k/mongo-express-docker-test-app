@@ -2,14 +2,11 @@ import { MongoClient } from "mongodb";
 import express from "express";
 
 const app = express() ;
-const client = new MongoClient('mongodb://admin:password@localhost:27017');
+const client = new MongoClient(process.env.MONGO_URL || 'mongodb://admin:password@localhost:27017');
 
 app.get('/products', async (req, res) => {
     try {
-        console.log('start')
         const products = await client.db("shop").collection("products").find().toArray();
-
-        console.log(products)
 
         res.json(products);
     } catch (e) {
