@@ -1,5 +1,11 @@
 version: "3"
 services:
+  express-app:
+    image: folt3k/mongo-express-test
+    ports:
+      - 3000:3000
+    environment:
+      - MONGO_URL=mongodb://admin:password@mongo:27017
   mongo:
     image: mongo
     container_name: mongo
